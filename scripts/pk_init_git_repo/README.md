@@ -32,14 +32,20 @@ You only need to authenticate once per system. Auth status is stored locally in 
    ```bash
    chmod +x pk_init_git_repo.sh
    ```
+   
+2. create a file .gitignore in the root of your repo with the following content:
 
-2. Run the script:
+   ```bash
+   /pk_init_git_repo.sh
+   ```
+
+3. Run the script:
 
    ```bash
    ./pk_init_git_repo.sh
    ```
 
-3. Follow the prompts:
+4. Follow the prompts:
    - Enter the name of the GitHub repository to create.
    - If not logged in, complete the login via browser.
    - The script creates a local folder, initializes Git, creates a GitHub repo, and pushes to `main`.
