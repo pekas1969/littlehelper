@@ -23,7 +23,7 @@
 
 ## Installation
 
-1. Download the projectfiles pksendmail.py and create_pksendmail_config.py from: https://github.com/pekas1969/littlehelper/tree/main/scripts/pkddgui
+1. Download the projectfiles pksendmail.py and create_pksendmail_config.py from: https://github.com/pekas1969/littlehelper/tree/main/scripts/pksendmail
 
 2. (Optional) Make scripts executable:
    ```bash
