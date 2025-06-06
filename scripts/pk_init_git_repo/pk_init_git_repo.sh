@@ -1,3 +1,5 @@
+#version 0.0.1
+
 #============================================================================
 #MIT License
 #
@@ -24,44 +26,60 @@
 
 #!/bin/bash
 
-# Abbrechen bei Fehlern
-set -e
+# Titel
+echo "📦 GitHub Repo Initializer"
 
-# Funktion: GitHub-Login prüfen
-check_gh_auth() {
-    if ! gh auth status &>/dev/null; then
-        echo "Du bist noch nicht bei GitHub (gh) angemeldet. Starte Login..."
-        gh auth login
-    else
-        echo "GitHub-Login erkannt: $(gh auth status --show-token | grep 'Logged in to')"
-    fi
-}
-
-# GitHub-Login prüfen
-check_gh_auth
-
-# Benutzer nach Repository-Namen fragen
-read -p "Name des neuen GitHub-Repositories: " repo_name
-
-# Prüfen, ob Eingabe leer ist
-if [[ -z "$repo_name" ]]; then
-    echo "Fehler: Repository-Name darf nicht leer sein."
+# Stelle sicher, dass gh installiert ist
+if ! command -v gh &> /dev/null; then
+    echo "❌ GitHub CLI (gh) ist nicht installiert. Bitte zuerst installieren: https://cli.github.com/"
     exit 1
 fi
 
-# Repository-Ordner erstellen
-mkdir "$repo_name"
-cd "$repo_name"
+# Prüfe ob gh authentifiziert ist
+if ! gh auth status &>/dev/null; then
+    echo "🔐 Du bist nicht bei GitHub angemeldet. Starte gh auth login..."
+    gh auth login
+    if [ $? -ne 0 ]; then
+        echo "❌ Authentifizierung fehlgeschlagen."
+        exit 1
+    fi
+fi
 
-# Git-Repo initialisieren
-git init -b main
+# Benutzer nach Repo-Namen fragen
+read -p "📛 Wie soll das neue GitHub-Repository heißen? " repo_name
+if [ -z "$repo_name" ]; then
+    echo "❌ Kein Repository-Name angegeben. Abbruch."
+    exit 1
+fi
 
-# Beispieldatei hinzufügen
-echo "# $repo_name" > README.md
-git add README.md
-git commit -m "Initial commit"
+# Aktuelles Verzeichnis
+repo_path=$(pwd)
+repo_dirname=$(basename "$repo_path")
 
-# GitHub-Repository erstellen und pushen
-gh repo create "$repo_name" --source=. --remote=origin --push --public
+# Falls kein Git-Repo, initialisieren
+if [ ! -d ".git" ]; then
+    echo "📁 Initialisiere neues Git-Repository im aktuellen Verzeichnis ($repo_path)..."
+    git init
+fi
 
-echo "✅ Repository '$repo_name' wurde erfolgreich erstellt und gepusht."
+# Hauptbranch auf main setzen (falls noch nicht)
+git symbolic-ref HEAD refs/heads/main
+
+# Repository bei GitHub erstellen (öffentlich)
+echo "🌐 Erstelle Remote-Repository '$repo_name' bei GitHub..."
+gh repo create "$repo_name" --source=. --public --remote=origin --push
+if [ $? -ne 0 ]; then
+    echo "❌ Fehler beim Erstellen des Repositories auf GitHub."
+    exit 1
+fi
+
+# Sicherheitsabfrage
+read -p "❓ Möchtest du das lokale Repository '$repo_path' jetzt committen und pushen? (y/N): " answer
+if [[ "$answer" =~ ^[YyJj]$ ]]; then
+    echo "✅ Dateien werden hinzugefügt, committed und gepusht..."
+    git add .
+    git commit -m "init: Initial commit"
+    git push -u origin main
+else
+    echo "ℹ️ Vorgang abgebrochen. Du kannst später manuell mit 'git add . && git commit && git push' fortfahren."
+fi
