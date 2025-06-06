@@ -9,6 +9,7 @@ Installer:
 
 Console tools:
 - **pk_init_git_repo.sh**: A simple Bash script to quickly initialize a local Git repository.
+- **pksendmail.py**: A simple script to send emails via console, supports multiple accounts
 
 Graphical tools:
 - **pkddgui.py**: A graphical user interface for disk imaging and cloning operations using `dd`.
@@ -21,7 +22,7 @@ You can either use the installer to manage the scripts, or manually copy individ
 ### 🔧 Option 1: Install via `install_littlehelper.py`
 
 1. Make sure you have **Python 3.7+**, **pip** and **pyyaml termcolor requests** installed.
-   Otherwise install Python and python-pip (or ptython3-pip, depends on your distribution) first, then
+   Otherwise install Python and python-pip (or python3-pip, depends on your distribution) first, then
    ```bash
    pip install pyyaml termcolor requests
    ```
