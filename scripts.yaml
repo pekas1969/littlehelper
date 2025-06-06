@@ -1,0 +1,7 @@
+scripts:
+  - name: pk_init_git_repo.sh
+    description: Initializes a local Git repo and connects it to GitHub
+  - name: pkddgui.py
+    description: GUI for disk cloning and imaging using dd
+  - name: pkmangui.py
+    description: Manpage viewer with a GUI interface
