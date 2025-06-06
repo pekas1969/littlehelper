@@ -15,8 +15,12 @@ You can either use the installer to manage the scripts, or manually copy individ
 
 ### 🔧 Option 1: Install via `install_littlehelper.py`
 
-1. Make sure you have **Python 3.7+** installed.
-2. Run the install script from this repository:
+1. Make sure you have **Python 3.7+** and **pyyaml termcolor requests** installed.
+   Otherwise install Python first, then
+   ```bash
+   pip install pyyaml termcolor requests
+   ```
+2. Download and run the install script from this repository:
    ```bash
    python3 install_littlehelper.py
    ```
