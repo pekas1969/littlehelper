@@ -4,8 +4,10 @@ This repository is a curated collection of useful scripts for system administrat
 
 ## Scripts
 
-Console tools:
+Installer:
 - **install_littlehelper.py**: The main install script.
+
+Console tools:
 - **pk_init_git_repo.sh**: A simple Bash script to quickly initialize a local Git repository.
 
 Graphical tools:
