@@ -4,8 +4,11 @@ This repository is a curated collection of useful scripts for system administrat
 
 ## Scripts
 
+Console tools:
 - **install_littlehelper.py**: The main install script.
 - **pk_init_git_repo.sh**: A simple Bash script to quickly initialize a local Git repository.
+
+Graphical tools:
 - **pkddgui.py**: A graphical user interface for disk imaging and cloning operations using `dd`.
 - **pkmangui.py**: A simple Manpage Viewer built with Python and PyQt6.
 
