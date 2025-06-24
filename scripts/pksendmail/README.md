@@ -83,10 +83,16 @@ python3 pksendmail.py \
 
 ```bash
 python3 pksendmail.py \
-  --from my_gmail \
+  --from hanswurst_gmail \
   --to friend@example.com \
   --subject "Greetings from Terminal" \
   --message "This is a test email from the command line."
+
+```
+or
+
+```bash
+python3 pksendmail.py --from hanswurst_gmail --to friend@example.com --subject "Greetings from Terminal" --message "This is a test email from the command line."
 ```
 
 Optional attachment:
@@ -104,14 +110,14 @@ Each config file is stored under:
 ~/.config/pksendmail/
 ```
 
-Example: `pkasparak_gmail.conf`
+Example: `hanswurst_gmail.conf`
 
 ```ini
 [account]
-name = Peter Kasparak
+name = Hans Wurst
 server = smtp.gmail.com
 port = 587
-auth_user = pkasparak@gmail.com
+auth_user = hwurst@gmail.com
 auth_method = tls
 ```
 
